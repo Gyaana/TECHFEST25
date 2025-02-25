@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Sustainability Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #8fd3f4, #84fab0);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      color: #333;
+      overflow-x: hidden;
+      transition: background 0.5s ease;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 450px;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 0.5s ease-in-out;
+      margin-top: 20px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      text-align: center;
+      color: #4caf50;
+      margin-bottom: 20px;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .input-field:focus {
+      border-color: #4caf50;
+      box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+    }
+
+    .button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+
+    .toggle-btn {
+      color: #4caf50;
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 10px auto;
+      border: 2px solid #4caf50;
+    }
+
+    .profile-info {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .eco-challenge {
+      background: #f7f7f7;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 20px 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .eco-challenge h3 {
+      color: #28a745;
+    }
+
+    .eco-challenge p {
+      color: #333;
+      font-size: 1rem;
+    }
+
+    .eco-challenge button {
+      background-color: #28a745;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .eco-challenge button:hover {
+      background-color: #218838;
+    }
+
+    .notification {
+      background-color: #ffcc00;
+      color: #333;
+      padding: 12px;
+      border-radius: 10px;
+      margin: 10px 0;
+      font-size: 1rem;
+      display: none;
+    }
+
+    .dark-mode {
+      background: #333;
+      color: #f4f4f4;
+    }
+
+    .dark-mode .button {
+      background-color: #333;
+      color: #f4f4f4;
+    }
+
+    .dark-mode .input-field {
+      background-color: #555;
+      color: #f4f4f4;
+      border-color: #777;
+    }
+
+    .dark-mode .eco-challenge {
+      background: #444;
+      color: white;
+    }
+
+    .coin-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
+
+    .coins {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      color: #f39c12;
+    }
+
+    .coins img {
+      margin-right: 8px;
+    }
+
+    .leaderboard {
+      margin-top: 30px;
+      padding: 10px;
+      background-color: #f7f7f7;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .leaderboard h3 {
+      color: #28a745;
+    }
+
+    .leaderboard ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .leaderboard li {
+      padding: 8px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .leaderboard li:last-child {
+      border-bottom: none;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .badge {
+      background-color: #28a745;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      margin: 5px;
+    }
+
+    .community-challenges {
+      background-color: #f1f1f1;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    .community-challenge {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: #fff;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .friend-request-section {
+      margin-top: 20px;
+      background-color: #f1f1f1;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .friend-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .friend-list li {
+      padding: 8px;
+      background-color: #fff;
+      margin-bottom: 8px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login and Signup -->
+  <div id="login-container" class="container">
+    <h2>Login to Sustainable Communities</h2>
+    <input type="text" id="username" class="input-field" placeholder="Enter your username">
+    <input type="password" id="password" class="input-field" placeholder="Enter your password">
+    <button class="button" onclick="login()">Login</button>
+    <p>Don't have an account? <span class="toggle-btn" onclick="toggleForm('signup')">Sign up</span></p>
+  </div>
+
+  <div id="signup-container" class="container" style="display:none;">
+    <h2>Create Account</h2>
+    <input type="text" id="new-username" class="input-field" placeholder="Choose a username">
+    <input type="password" id="new-password" class="input-field" placeholder="Choose a password">
+    <button class="button" onclick="signup()">Sign Up</button>
+    <p>Already have an account? <span class="toggle-btn" onclick="toggleForm('login')">Login</span></p>
+  </div>
+
+  <!-- App Container -->
+  <div id="app-container" class="container" style="display:none;">
+    <div id="notification" class="notification"></div>
+
+    <div class="profile-info">
+      <img src="https://via.placeholder.com/80" class="avatar" id="user-avatar">
+      <h3 id="user-name"></h3>
+      <p><span id="total-coins">0</span> Coins</p>
+      <button class="button" onclick="chooseAvatar()">Choose Avatar</button>
+      <button class="button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    </div>
+
+    <!-- Friend System -->
+    <div class="friend-request-section">
+      <h3>Add a Friend</h3>
+      <input type="text" id="friend-username" class="input-field" placeholder="Enter username to search">
+      <button class="button" onclick="sendFriendRequest()">Send Friend Request</button>
+
+      <h4>Friends List:</h4>
+      <ul id="friend-list" class="friend-list"></ul>
+    </div>
+
+    <div class="eco-challenge">
+      <h3>Complete Challenges</h3>
+      <p>Recycle, compost, and save energy to earn coins!</p>
+      <button onclick="completeChallenge('Recycling')">Recycle</button>
+      <button onclick="completeChallenge('Composting')">Compost</button>
+      <button onclick="completeChallenge('Plant Trees')">Plant Trees</button>
+      <button onclick="completeChallenge('Save Energy')">Save Energy</button>
+    </div>
+
+    <div class="community-challenges">
+      <h3>Community Challenges</h3>
+      <div class="community-challenge">
+        <p>Reduce Water Usage</p>
+        <button class="button">Join Challenge</button>
+      </div>
+      <div class="community-challenge">
+        <p>Join Local Clean-up Event</p>
+        <button class="button">Join Challenge</button>
+      </div>
+    </div>
+
+    <div class="leaderboard">
+      <h3>Leaderboard</h3>
+      <ul id="leaderboard-list"></ul>
+    </div>
+
+    <div class="badges">
+      <div class="badge">Recycling Master</div>
+      <div class="badge">Eco Warrior</div>
+    </div>
+
+    <button class="button" onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    let isDarkMode = false;
+    let friends = [];
+
+    function toggleForm(form) {
+      if (form === 'signup') {
+        document.getElementById('login-container').style.display = 'none';
+        document.getElementById('signup-container').style.display = 'block';
+      } else {
+        document.getElementById('signup-container').style.display = 'none';
+        document.getElementById('login-container').style.display = 'block';
+      }
+    }
+
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (username && password) {
+        if (localStorage.getItem('password-' + username) === password) {
+          localStorage.setItem('username', username);
+          showApp();
+        } else {
+          showNotification("Incorrect username or password!");
+        }
+      } else {
+        showNotification("Please enter both username and password!");
+      }
+    }
+
+    function signup() {
+      const username = document.getElementById('new-username').value.trim();
+      const password = document.getElementById('new-password').value.trim();
+
+      if (username && password) {
+        if (localStorage.getItem('password-' + username)) {
+          showNotification("Username already exists!");
+        } else {
+          localStorage.setItem('password-' + username, password);
+          localStorage.setItem('username', username);
+          showApp();
+        }
+      } else {
+        showNotification("Please enter both username and password!");
+      }
+    }
+
+    function showApp() {
+      const username = localStorage.getItem('username');
+      document.getElementById('user-name').textContent = username;
+      document.getElementById('user-avatar').src = `https://api.adorable.io/avatars/80/${username}.png`;
+      document.getElementById('login-container').style.display = 'none';
+      document.getElementById('signup-container').style.display = 'none';
+      document.getElementById('app-container').style.display = 'block';
+      loadActions();
+      updateCoins();
+      loadLeaderboard();
+    }
+
+    function chooseAvatar() {
+      const avatars = [
+        'https://api.adorable.io/avatars/80/1.png',
+        'https://api.adorable.io/avatars/80/2.png',
+        'https://api.adorable.io/avatars/80/3.png',
+      ];
+      const newAvatar = prompt('Enter a number to choose an avatar (1, 2, or 3):');
+      if (newAvatar >= 1 && newAvatar <= 3) {
+        document.getElementById('user-avatar').src = avatars[newAvatar - 1];
+      }
+    }
+
+    function loadActions() {
+      const username = localStorage.getItem('username');
+      const actions = JSON.parse(localStorage.getItem('actions-' + username) || '[]');
+      const actionLog = document.getElementById('action-log');
+      actionLog.innerHTML = '';
+      actions.forEach((action, index) => {
+        actionLog.innerHTML += `<p>${index + 1}. ${action}</p>`;
+      });
+    }
+
+    function completeChallenge(challenge) {
+      const username = localStorage.getItem('username');
+      const actions = JSON.parse(localStorage.getItem('actions-' + username) || '[]');
+      actions.push(`${challenge} challenge completed!`);
+      localStorage.setItem('actions-' + username, JSON.stringify(actions));
+      updateCoins();
+      loadActions();
+      showNotification(`${challenge} challenge completed!`);
+    }
+
+    function updateCoins() {
+      const username = localStorage.getItem('username');
+      const actions = JSON.parse(localStorage.getItem('actions-' + username) || '[]');
+      let coins = actions.reduce((sum, action) => {
+        if (action.includes('Recycling')) return sum + 10;
+        if (action.includes('Composting')) return sum + 15;
+        if (action.includes('Plant Trees')) return sum + 20;
+        if (action.includes('Save Energy')) return sum + 25;
+        return sum;
+      }, 0);
+      document.getElementById('total-coins').textContent = coins;
+    }
+
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.style.display = 'block';
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 3000);
+    }
+
+    function toggleDarkMode() {
+      isDarkMode = !isDarkMode;
+      document.body.classList.toggle('dark-mode', isDarkMode);
+    }
+
+    function logout() {
+      localStorage.removeItem('username');
+      localStorage.removeItem('actions-' + localStorage.getItem('username'));
+      document.getElementById('login-container').style.display = 'block';
+      document.getElementById('app-container').style.display = 'none';
+    }
+
+    function loadLeaderboard() {
+      const leaderboard = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith('actions-')) {
+          const username = key.slice(8); // Remove "actions-" prefix
+          const actions = JSON.parse(localStorage.getItem(key)) || [];
+          const coins = actions.reduce((sum, action) => {
+            if (action.includes('Recycling')) return sum + 10;
+            if (action.includes('Composting')) return sum + 15;
+            if (action.includes('Plant Trees')) return sum + 20;
+            if (action.includes('Save Energy')) return sum + 25;
+            return sum;
+          }, 0);
+          leaderboard.push({ username, coins });
+        }
+      }
+      leaderboard.sort((a, b) => b.coins - a.coins); // Sort by coins in descending order
+
+      const leaderboardList = document.getElementById('leaderboard-list');
+      leaderboardList.innerHTML = '';
+      leaderboard.forEach(user => {
+        leaderboardList.innerHTML += `<li>${user.username} - ${user.coins} coins</li>`;
+      });
+    }
+
+    function sendFriendRequest() {
+      const friendUsername = document.getElementById('friend-username').value.trim();
+      if (friendUsername && localStorage.getItem('password-' + friendUsername)) {
+        // Simulate a friend request
+        alert(`Friend request sent to ${friendUsername}`);
+        // Save the friend (for now, just add to the list)
+        friends.push(friendUsername);
+        document.getElementById('friend-username').value = '';
+        updateFriendList();
+      } else {
+        alert("User not found or invalid.");
+      }
+    }
+
+    function updateFriendList() {
+      const friendList = document.getElementById('friend-list');
+      friendList.innerHTML = '';
+      friends.forEach(friend => {
+        friendList.innerHTML += `<li>${friend}</li>`;
+      });
+    }
+  </script>
+</body>
+</html>
+
