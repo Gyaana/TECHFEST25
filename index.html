@@ -503,6 +503,84 @@
         friendList.innerHTML += `<li>${friend}</li>`;
       });
     }
+document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll("button"); // Select all buttons
+    const verificationCode = document.getElementById("verification-code"); // The already written verification code
+    
+    buttons.forEach(button => {
+        if (["Recycle", "Compost", "Plant Trees", "Save Energy"].includes(button.textContent)) {
+            button.addEventListener("click", function () {
+                verificationCode.style.display = "block"; // Show the verification code input
+                verificationCode.focus(); // Optionally focus on the input field
+            });
+        }
+    });
+
+    const uploadInput = document.getElementById("proof-upload");
+    const submitButton = document.getElementById("submit-challenge");
+    const verificationStatus = document.getElementById("verification-status");
+    const peerApprovalSection = document.getElementById("peer-verification");
+    const approveButton = document.getElementById("approve");
+    const denyButton = document.getElementById("deny");
+    let uploadedProof = null;
+    let isVerified = false;
+
+    // Load saved progress from local storage
+    function loadProgress() {
+        const savedProof = localStorage.getItem("uploadedProof");
+        if (savedProof) {
+            uploadedProof = savedProof;
+            verificationStatus.innerText = "Proof uploaded. Pending verification.";
+        }
+    }
+    loadProgress();
+
+    // Upload proof
+    uploadInput.addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            uploadedProof = URL.createObjectURL(file);
+            localStorage.setItem("uploadedProof", uploadedProof);
+            verificationStatus.innerText = "Proof uploaded. Pending verification.";
+        }
+    });
+
+    // Simulated AI Verification (80% success rate)
+    function aiVerify() {
+        return Math.random() < 0.8;
+    }
+
+    // Submit challenge
+    submitButton.addEventListener("click", function () {
+        if (!uploadedProof) {
+            alert("Please upload proof before submitting!");
+            return;
+        }
+
+        isVerified = aiVerify();
+        if (isVerified) {
+            verificationStatus.innerText = "AI Verification Passed. Awaiting Peer Approval.";
+            peerApprovalSection.style.display = "block";
+        } else {
+            verificationStatus.innerText = "AI Verification Failed. Please retry.";
+        }
+    });
+
+    // Peer verification
+    approveButton.addEventListener("click", function () {
+        alert("Challenge Approved! Coins Earned.");
+        localStorage.removeItem("uploadedProof");
+        verificationStatus.innerText = "Challenge Approved! Coins Added.";
+        peerApprovalSection.style.display = "none";
+    });
+
+    denyButton.addEventListener("click", function () {
+        alert("Challenge Denied. Try Again.");
+        verificationStatus.innerText = "Challenge Denied. Resubmit Proof.";
+        peerApprovalSection.style.display = "none";
+    });
+});
+
   </script>
 </body>
 </html>
